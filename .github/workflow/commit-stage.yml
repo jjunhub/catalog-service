@@ -1,0 +1,36 @@
+name: Commit Stage
+on : push
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+    - name: Checkout source code # 현재 레포지토리 코드 읽기
+      uses: actions/checkout@v3
+    - name: Set up JDK # Runtime 설치하고 설정
+      uses: actions/setup-java@v3
+      with: # 사용할 버전, 배포, 캐시 유형을 정의한다.
+        distribution: temurin
+        java-version: 17
+        cache: gradle
+    - name: Code vulnerability scanning
+      uses: anchore/scan-action@v3
+      id: scan
+      with:
+        path: "${{github.workspace}}"
+        fail-build: false # 보안성 취약 검사시 실패로 처리하는가?
+        severity-cutoff: high
+        acs-report-enable: true
+    - name: Upload vulnerability report
+      uses: github/codeql-action/upload-sarif@v2
+      if: success() || failure() # 이전 단계가 실패하더라도 리포트 전송
+      with:
+        sarif_file: ${{ steps.scan.outputs.sarif }} # 이전 scan 단계의 리포트를 가져온다.
+    - name: Build, unit tests and integration tests
+      run: |
+        chmod +x gradlew
+        ./gradlew build
