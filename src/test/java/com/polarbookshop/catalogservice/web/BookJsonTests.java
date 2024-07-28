@@ -1,7 +1,8 @@
-package com.polarbookshop.catalogservice.domain;
+package com.polarbookshop.catalogservice.web;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.polarbookshop.catalogservice.domain.Book;
 import java.time.Instant;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

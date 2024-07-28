@@ -34,3 +34,9 @@ jobs:
       run: |
         chmod +x gradlew
         ./gradlew build
+    - name: Upload Test Report
+      if: failure()
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-report
+        path: build/reports/tests/test
