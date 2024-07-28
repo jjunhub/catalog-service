@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.test.context.ActiveProfiles;
@@ -17,7 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 @DataJdbcTest
 @Import(DataConfig.class)
 @AutoConfigureTestDatabase(
-        replace = Replace.NONE
+        replace = AutoConfigureTestDatabase.Replace.NONE
 )
 @ActiveProfiles("integration")
 @Slf4j
