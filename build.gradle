@@ -68,7 +68,7 @@ tasks.named('test') {
 
 tasks.withType(Test).configureEach {
     reports {
-        junitXml.enabled = true
-        html.enabled = true
+        junitXml.required.set(true)
+        html.required.set(true)
     }
 }
