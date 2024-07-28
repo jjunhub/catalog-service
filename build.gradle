@@ -25,7 +25,7 @@ bootRun {
 
 ext {
     set('springCloudVersion', "2021.0.9")
-    set('testcontainersVersion', "1.17.3")
+    set('testcontainersVersion', "1.19.8")
 }
 
 dependencies {
@@ -49,6 +49,8 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.testcontainers:postgresql'
     implementation 'org.flywaydb:flyway-core'
+
+    // Custom
     testCompileOnly 'org.projectlombok:lombok' // 테스트 의존성 추가
     testAnnotationProcessor 'org.projectlombok:lombok' // 테스트 의존성 추가
 }
