@@ -65,3 +65,10 @@ dependencyManagement {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.withType(Test).configureEach {
+    reports {
+        junitXml.enabled = true
+        html.enabled = true
+    }
+}
