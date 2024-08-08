@@ -8,6 +8,7 @@ metadata:
     app: catalog-service
 
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: catalog-service
@@ -21,7 +22,7 @@ spec:
           image: catalog-service
           imagePullPolicy: IfNotPresent
           lifecycle:
-            preStop:
+            preStop: # 우아한 종료 설정
               exec:
                 command: [ "sh", "-c", "sleep 5" ]
           ports:
