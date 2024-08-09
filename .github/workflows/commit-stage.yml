@@ -28,6 +28,7 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew build
+    
 
       - name: Upload Test Report
         if: failure()
@@ -50,6 +51,14 @@ jobs:
         if: success() || failure() # 이전 단계가 실패하더라도 리포트 전송
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }} # 이전 scan 단계의 리포트를 가져온다.
+
+      - name: Validate Kubernetes manifests
+        uses: stefanprodan/kube-tools@v1
+        with:
+          kubectl: latest
+          kubeval: latest
+          command: |
+            kubeval --strict -d k8s
 
   package:
     name: Package and Publish

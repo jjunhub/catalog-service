@@ -18,7 +18,7 @@ spec:
         app: catalog-service
     spec:
       containers:
-        - name: catalog-service
+        - name: caztalog-service
           image: catalog-service
           imagePullPolicy: IfNotPresent
           lifecycle:
